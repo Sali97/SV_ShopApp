@@ -19,7 +19,7 @@ namespace SV_ShopApp
             MainForm = Form1;
             gdelProduct = deleteProduct;
 
-            if (gdelProduct.Quantity==1)
+            if (gdelProduct.Quantity == 1)
             {
                 btnDelOne.Enabled = false;
             }
@@ -36,7 +36,6 @@ namespace SV_ShopApp
 
         private void setLabelText(string lblText)
         {
-
             lblMessage.Text = lblText;
         }
 
@@ -55,7 +54,7 @@ namespace SV_ShopApp
             DialogResult dialogResult = MessageBox.Show(delText, this.Text, MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                if (delCode>0)
+                if (delCode > 0)
                 {
                     MainForm.deleteProduct(gdelProduct, 1);
                 }

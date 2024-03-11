@@ -6,7 +6,7 @@ namespace SV_ShopApp
 {
     public partial class Form1 : Form
     {
-
+        InputValidator inputValid = new InputValidator();
         ProductServices theProdService;
         BindingList<Product> bindProdList;
 
@@ -21,6 +21,12 @@ namespace SV_ShopApp
         public void deleteProduct(Product deleteProduct, int count)
         {
             theProdService.deleteProduct(deleteProduct, count);
+            refresh();
+        }
+
+        public void addMultiProd(Product theProd)
+        {
+            theProdService.NewProduct(theProd.Id, theProd.Quantity);
             refresh();
         }
 
@@ -107,31 +113,19 @@ namespace SV_ShopApp
 
         private void btnMultiAdd_Click(object sender, EventArgs e)
         {
+            Form MultiAddForm = new MultiAddForm(this);
+            MultiAddForm.ShowDialog();
+
             refresh();
         }
 
-        private bool checkIsInt(String text)
-        {
-            bool isInt = false;
 
-            try
-            {
-                int testInt = Convert.ToInt32(text);
-                isInt = true;
-            }
-            catch (Exception)
-            {
-
-            }
-
-            return isInt;
-        }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
             {
-                if (textBox1.TextLength == 4 && checkIsInt(textBox1.Text))
+                if (inputValid.checkInput(textBox1.Text))
                 {
                     theProdService.NewProduct(textBox1.Text, 1);
                     refresh();
@@ -140,8 +134,8 @@ namespace SV_ShopApp
                 {
                     MessageBox.Show("Hiba a termékkód megadásánál!");
                 }
+                textBox1.Clear();
             }
-            textBox1.Clear();
         }
     }
 }

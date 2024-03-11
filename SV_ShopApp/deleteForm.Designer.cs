@@ -99,6 +99,7 @@
             ClientSize = new Size(554, 221);
             Controls.Add(lblMessage);
             Controls.Add(panel1);
+            MaximizeBox = false;
             MaximumSize = new Size(570, 260);
             MinimumSize = new Size(570, 260);
             Name = "deleteForm";
